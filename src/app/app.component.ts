@@ -18,39 +18,11 @@ class Item{
     selector: "purchase-app",
     standalone: true,
     imports: [FormsModule],
-    template: `
-        <h1> Список покупок </h1>
-        <div>
-            <p>
-                <label>Товар</label><br>
-                <input [(ngModel)]="text" />
-            </p>
-            <p>
-                <label>Цена</label><br>
-                <input type="number" [(ngModel)]="price" />
-            </p>
-            <button (click)="addItem(text, price)">Добавить</button>
-        </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Предмет</th>
-                    <th>Цена</th>
-                    <th>Куплено</th>
-                </tr>
-            </thead>
-            <tbody>
-            @for (item of items; track item.purchase) {
-                <tr>
-                    <td>{{item.purchase}}</td>
-                    <td>{{item.price}}</td>
-                    <td><input type="checkbox" [(ngModel)]="item.done" /></td>
-                </tr>
-            }
-            </tbody>
-        </table>`
+    templateUrl: './app.component.html',
+    styleUrls: [`./app.component.css`]
 })
 export class AppComponent { 
+    count: number = 0;
     text: string = "";
     price: number = 0;
       
@@ -66,5 +38,8 @@ export class AppComponent {
         if(text==null || text.trim()=="" || price==null)
             return;
         this.items.push(new Item(text, price));
+    }
+    increase(): void{
+        this.count++;
     }
 }
